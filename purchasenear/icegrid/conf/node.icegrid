@@ -1,0 +1,19 @@
+# Node properties
+IceGrid.Node.Endpoints=tcp
+IceGrid.Node.Name=Node1
+IceGrid.Node.Data=../ice_db/node1
+
+Ice.Default.Locator=IceGrid/Locator:tcp -h localhost -p 4062
+
+IceGrid.Node.Trace.Activator=3
+IceGrid.Node.Trace.Adapter=3
+IceGrid.Node.Trace.Patch=3
+IceGrid.Node.Trace.Replica=3
+IceGrid.Node.Trace.Server=3
+#输出节点各服务的控制台输出：
+IceGrid.Node.Output=../logs/node/
+#IceGrid.Node.RedirectErrToOut=1
+#Ice.StdOut=../logs/node.stdout.log
+#指定错误日志文件
+#Ice.StdErr=../logs/node.stderr.log  
+

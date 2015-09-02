@@ -1,0 +1,241 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC
+    "-//Puppy Crawl//DTD Check Configuration 1.2//EN"
+    "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
+
+<!-- Checkstyle configuration that checks the Araf coding standards. -->
+<module name="Checker">
+
+	<property name="severity" value="ERROR" />
+	<property name="charset" value="UTF-8" />
+
+	<!-- Checks for file Headers -->
+	<!-- See http://checkstyle.sf.net/config_header.html -->
+	<module name="Header">
+		<property name="header"
+			value="/*\n * Copyright (c) CN.DSW Corp.\n * All Rights Reserved.\n */" />
+		<property name="fileExtensions" value="java" />
+	</module>
+
+	<!-- Checks for max code lines -->
+	<!-- See http://checkstyle.sf.net/config_sizes.html -->
+	<module name="FileLength">
+		<property name="max" value="2000" />
+	</module>
+
+	<!-- Checks that there are no tab characters ('\t') in the source code. -->
+	<!-- See http://checkstyle.sf.net/config_whitespace.html -->
+	<module name="FileTabCharacter" />
+
+	<module name="TreeWalker">
+
+		<property name="tabWidth" value="4" />
+		<property name="cacheFile" value="target/checkstyle-cachefile" />
+
+		<!-- =============== Checks for coding typography =============== -->
+		<!-- http://checkstyle.sourceforge.net/config_blocks.html -->
+		<!-- Checks for empty blocks. -->
+		<!-- <module name="EmptyBlock" /> -->
+		<!-- Checks for braces around code blocks. Even the code block that only 
+			containing one statement must have braces around. -->
+		<module name="NeedBraces" />
+		<!-- Checks for the placement of left curly braces ('{') for code blocks. 
+			The brace must always be on the end of the line. For example: if (condition) 
+			{ ... -->
+		<module name="LeftCurly">
+			<property name="option" value="eol" />
+		</module>
+		<!-- Checks the placement of right curly braces ('') for else, try, and 
+			catch tokens. The brace must be on the same line as the next statement. For 
+			example: try { ... } finally { -->
+		<module name="RightCurly">
+			<property name="option" value="same" />
+		</module>
+
+		<!-- check to accept lines up to 120 characters long except for Javadocs 
+			comments and new key word to create object. -->
+		<module name="LineLength">
+			<property name="max" value="120" />
+			<property name="ignorePattern" value="(^ *\* *[^ ]+$)|(^.*new.*$)" />
+		</module>
+
+		<!-- Check for whitespace -->
+		<!-- http://checkstyle.sourceforge.net/config_whitespace.html -->
+		<!-- Checks the padding between the identifier of a method definition, 
+			constructor definition, method call, or constructor invocation; and the left 
+			parenthesis of the parameter list. That is, a space is forbidden between 
+			identifier and left parenthesis. For example: methoad(a,b), not method( a, 
+			b ). -->
+		<module name="MethodParamPad">
+			<property name="option" value="nospace" />
+		</module>
+		<!-- Checks the policy on the padding of parentheses; i.e. whether a space 
+			is required after a left parenthesis and before a right parenthesis, or such 
+			spaces are forbidden. -->
+		<module name="ParenPad">
+			<property name="option" value="nospace" />
+		</module>
+		<!-- check for whitespace after comma ',' and semicolon ';' -->
+		<module name="WhitespaceAfter">
+			<property name="tokens" value="COMMA, SEMI" />
+		</module>
+
+		<!-- Check for wrap lines -->
+		<!-- http://checkstyle.sourceforge.net/config_whitespace.html -->
+		<!-- Checks the policy on how to wrap lines on operators. Setting to wrap 
+			line before operator, that is, the operator must be on a new line. -->
+		<module name="OperatorWrap">
+			<property name="option" value="nl" />
+		</module>
+
+		<!-- Checks for indentation -->
+		<module name="Indentation">
+			<property name="basicOffset" value="4" />
+			<property name="braceAdjustment" value="0" />
+			<property name="caseIndent" value="4" />
+		</module>
+
+		<!-- =============== Checks for imports =============== -->
+		<!-- See http://checkstyle.sf.net/config_import.html -->
+		<module name="AvoidStarImport">
+			<!-- Checks that there are no import statements that use the * notation. -->
+			<property name="excludes" value="java.io,java.net,java.util" />
+		</module>
+		<!-- Checks for imports from a set of illegal packages. By default, the 
+			check rejects all sun.* packages since programs that contain direct calls 
+			to the sun.* packages are not 100% Pure Java -->
+		<module name="IllegalImport" />
+		<module name="RedundantImport" />
+		<module name="UnusedImports" />
+
+		<!-- =============== Check for Java naming conventions =============== -->
+		<!-- http://checkstyle.sourceforge.net/config_naming.html -->
+		<!-- Check for Package naming conventions that underscores and uppercase 
+			letters are not allowed -->
+		<module name="PackageName">
+			<property name="format" value="^[a-z]+(\.[a-z][a-z0-9]*)*$" />
+		</module>
+		<!-- Check for Type(Classes and Interfaces) naming conventions -->
+		<module name="TypeName" />
+		<module name="MemberName" />
+		<!-- Check for Constant naming conventions except that log variable -->
+		<module name="ConstantName">
+			<property name="format"
+				value="^((log)|([a-z][a-z0-9]*Log)|([A-Z][A-Z0-9]*(_[A-Z0-9]+)*))$" />
+		</module>
+		<!-- Check for Variable naming conventions -->
+		<module name="LocalVariableName" />
+		<module name="LocalFinalVariableName" />
+		<module name="StaticVariableName" />
+		<!-- Check for Method naming conventions -->
+		<module name="MethodName" />
+		<!-- Check for Parameters naming conventions -->
+		<module name="ParameterName" />
+		<!-- Check for Generic Parameters naming conventions -->
+		<!-- <module name="ClassTypeParameterName"> <property name="format" value="E|T|K|V|X" 
+			/> </module> <module name="MethodTypeParameterName"> <property name="format" 
+			value="E|T|K|V|X" /> </module> -->
+
+		<!-- =============== Check for Javadoc comments =============== -->
+		<!-- See http://checkstyle.sf.net/config_javadoc.html -->
+		<!-- Checks Javadoc comments for class and interface definitions. -->
+		<module name="JavadocType">
+			<property name="versionFormat" value="^Araf v1.0$" />
+			<property name="authorFormat"
+				value="^[A-Z][a-z]* [A-Z][a-z]*, 201[1-9]-([0]{0,1}[1-9]|[1][0-2])-([0]{0,1}[1-9]|[1-2][0-9]|[3][0-1])$" />
+		</module>
+
+		<!-- Checks Javadoc comments for method -->
+		<module name="JavadocMethod">
+			<property name="scope" value="protected" />
+			<property name="allowUndeclaredRTE" value="true" />
+			<property name="allowMissingPropertyJavadoc" value="true" />
+		</module>
+		<!-- module name="JavadocVariable"/ -->
+		<module name="JavadocStyle">
+			<property name="checkEmptyJavadoc" value="true" />
+		</module>
+
+		<!-- =============== Check for Modifier =============== -->
+		<!-- http://checkstyle.sourceforge.net/config_modifier.html -->
+		<module name="ModifierOrder" />
+		<module name="RedundantModifier" />
+
+		<!-- =============== Check for Class Design =============== -->
+		<!-- Implements Bloch, Effective Java, Item 17 - Use Interfaces only to 
+			define types. According to Bloch, an interface should describe a type. It 
+			is therefore inappropriate to define an interface that does not contain any 
+			methods but only constants. -->
+		<module name="InterfaceIsType" />
+		<!-- Make sure that utility classes (classes that contain only static methods 
+			or fields in their API) do not have a public constructor. -->
+		<module name="HideUtilityClassConstructor" />
+		<!-- Check nested (internal) classes/interfaces are declared at the bottom 
+			of the class after all method and field declarations. -->
+		<module name="InnerTypeLast" />
+
+		<!-- =============== Check for Annotations =============== -->
+		<module name="MissingOverride" />
+
+		<!-- Checks that string literals are not used with == or !=. Rationale: 
+			Novice Java programmers often use code like: if (x == "something") -->
+		<module name="StringLiteralEquality" />
+		<!-- Verifies there are no finalize() methods defined in a class. -->
+		<module name="NoFinalizer" />
+		<!-- Ensure a class is has a package declaration, and (optionally) whether 
+			the package name matches the directory name for the source file. Rationale: 
+			Classes that live in the null package cannot be imported. Many novice developers 
+			are not aware of this. -->
+		<module name="PackageDeclaration" />
+		<!-- The parts of a class or interface declaration should appear in the 
+			following order: 1. Class (static) variables. First the public class variables, 
+			then the protected, then package level (no access modifier), and then the 
+			private. 2. Instance variables. First the public class variables, then the 
+			protected, then package level (no access modifier), and then the private. 
+			3. Constructors. 4.Methods. -->
+		<module name="DeclarationOrder" />
+
+		<!-- =============== Check for coding practices =============== -->
+		<!-- http://checkstyle.sourceforge.net/config_coding.html -->
+		<!-- Check that the default is after all the cases in a switch statement. 
+			Rationale: Java allows default anywhere within the switch statement. But 
+			it is more readable if it comes after the last case. -->
+		<module name="DefaultComesLast" />
+		<!-- Checks that switch statement has "default" clause. -->
+		<module name="MissingSwitchDefault" />
+		<!-- Checks for fall through in switch statements Finds locations where 
+			a case contains Java code - but lacks a break, return, throw or continue 
+			statement. -->
+		<module name="FallThrough" />
+
+		<!-- Checks that each variable declaration is in its own statement and 
+			on its own line. -->
+		<module name="MultipleVariableDeclarations" />
+		<!-- Checks there is only one statement per line. -->
+		<module name="OneStatementPerLine" />
+		<!-- Detects empty statements (standalone ;). -->
+		<module name="EmptyStatement" />
+
+		<!-- Checks for assignments in subexpressions, such as in String s = Integer.toString(i 
+			= 2);. -->
+		<module name="InnerAssignment" />
+		<module name="EqualsHashCode" />
+
+		<!-- http://checkstyle.sourceforge.net/config_misc.html -->
+		<!-- Checks the style of array type definitions. Some like Java-style: 
+			public static void main(String[] args) or String[] strs -->
+		<module name="ArrayTypeStyle">
+			<property name="javaStyle" value="true" />
+		</module>
+
+		<!-- Checks that long constants are defined with an upper ell. That is 
+			' L' and not 'l'. -->
+		<module name="UpperEll" />
+
+		<!-- 布尔运算符在一条语句中允许出现的最大数目 -->
+		<module name="BooleanExpressionComplexity">
+			<property name="max" value="7" />
+		</module>
+
+	</module>
+</module>

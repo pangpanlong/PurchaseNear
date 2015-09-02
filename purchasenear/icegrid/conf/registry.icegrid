@@ -1,0 +1,28 @@
+# Registry properties
+IceGrid.Registry.Client.Endpoints=tcp -h localhost -p 4062
+IceGrid.Registry.Server.Endpoints=default -h localhost
+IceGrid.Registry.Internal.Endpoints=default -h localhost
+IceGrid.Registry.AdminPermissionsVerifier=IceGrid/NullPermissionsVerifier
+IceGrid.Registry.PermissionsVerifier=IceGrid/NullPermissionsVerifier
+IceGrid.Registry.Data=../ice_db/registry
+#IceGrid.Registry.Admin.Endpoints=default
+IcePack.Registry.DynamicRegistration=1
+IceGrid.Registry.ReplicaName=Master
+
+IceGrid.Registry.Trace.Adapter=1
+IceGrid.Registry.Trace.Application=1
+IceGrid.Registry.Trace.Locator=2
+IceGrid.Registry.Trace.Node=2
+IceGrid.Registry.Trace.Object=1
+IceGrid.Registry.Trace.Patch=1
+IceGrid.Registry.Trace.Replica=1
+IceGrid.Registry.Trace.Server=1
+IceGrid.Registry.Trace.Session=2
+
+
+Ice.Default.Locator=IceGrid/Locator:tcp -h localhost -p 4062
+IceGridAdmin.Username=mygrid
+IceGridAdmin.Password=mygrid
+
+
+

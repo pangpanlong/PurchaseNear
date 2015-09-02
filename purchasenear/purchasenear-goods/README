@@ -1,0 +1,89 @@
+索引数据类型：
+goodsName	商品名
+sellerName	卖家名
+goodsCategory	商品分类ID，支持多种品牌，用逗号分隔
+brandId	品牌Id，支持多种品牌，用逗号分隔
+hypostatic	1为实体店
+deliver	1为支持送货上门
+secondHand	1为二手商品
+barter	1为物易物
+price	商品价格
+saleCount	销量
+browseCount	浏览量
+locations	位置信息，格式为[lat,lon]
+以下字段不需要创建索引：
+goodsId
+stock 剩余库存
+save_time 保存时间
+update_time 最后修改时间
+
+curl -XDELETE http://localhost:9200/purchasenear
+
+curl -XPOST http://localhost:9200/purchasenear/ -d '
+{
+"mappings": {
+	"goods": {
+		"properties": {
+			"goodsId":		{"type": "long",	"index": "no"},
+			"goodsName":	{"type": "string"},
+			"sellerName":	{"type": "string"},
+			"goodsCategory":{"type": "integer"},
+			"brandId":		{"type": "integer"},
+			"hypostatic":	{"type": "short"},
+			"deliver":		{"type": "short"},
+			"secondHand":	{"type": "short"},
+			"barter":		{"type": "short"},
+			"price":		{"type": "float"},
+			"saleCount":	{"type": "long"},
+			"browseCount":	{"type": "long"},
+			"locations": 	{"type": "geo_point"},
+			"stock":		{"type": "integer",	"index": "no"},
+			"saveTime":		{"type": "date",	"index": "no", 	"format": "yyyy-MM-dd'T'HH:mm:ss"},
+			"updateTime":	{"type": "date",	"index": "no", 	"format": "yyyy-MM-dd'T'HH:mm:ss"}
+					}
+			}	
+		}
+}
+'
+
+curl -POST 'http://localhost:9200/purchasenear/goods/' -d '
+{
+	"goodsId":1,
+	"goodsName":"吊带1",
+	"sellerName":"abc",
+	"goodsCategory":1,
+	"brandId":1,
+	"hypostatic":1,
+	"deliver":1,
+	"secondHand":1,
+	"barter":1,
+	"price":50,
+	"saleCount":1000,
+	"browseCount":30000,
+	"locations":[50,50],
+	"stock":300,
+	"saveTime": 	"2015-08-16T13:12:00",
+	"updateTime": 	"2015-08-16T13:12:00"
+}
+'
+curl -POST 'http://localhost:9200/purchasenear/goods/' -d '
+{
+	"goodsId":2,
+	"goodsName":"吊带2",
+	"sellerName":"aaa",
+	"goodsCategory":1,
+	"brandId":1,
+	"hypostatic":1,
+	"barter":1,
+	"deliver":1,
+	"secondHand":1,
+	"price":100,
+	"saleCount":100,
+	"browseCount":300,
+	"locations":[50,50],
+	"stock":200,
+	"saveTime": 	"2015-08-16T13:12:00",
+	"updateTime": 	"2015-08-16T13:12:00"
+	
+}
+'

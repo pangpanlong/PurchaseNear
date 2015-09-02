@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- This file was written by IceGrid Admin -->
+<icegrid>
+   <application name="Application">
+	 <properties id="DefaultProperties">
+			<property name="Ice.IPv6" value="0"/>
+			<property name="Ice.Default.EndpointSelection" value="Random"/>
+			<property name="Ice.Default.LocatorCacheTimeout" value="3000"/>
+			<property name="Ice.BackgroundLocatorCacheUpdates" value="1"/>
+			<property name="Ice.ACM.Client" value="600"/>
+			<property name="Ice.RetryIntervals" value="-1"/>
+			<property name="Ice.Admin.DelayCreation" value="0"/>
+			<property name="Ice.Override.ConnectTimeout" value="50000"/>
+			<property name="Ice.Override.Timeout" value="500000"/>
+	 </properties>
+    
+	<server-template id="GoodsSearchServiceBoxTemplate">
+	  	<parameter name="index" />
+		<icebox id="GoodsSearchServiceBox${index}" exe="C:\Program Files\Java\jdk1.8.0_51\bin\java" activation="always">
+			<properties>
+				<properties refid="DefaultProperties" />
+			</properties>
+			<option>org.purchasenear.common.ice.server.Sl4jIceBoxServer</option>
+			<env>CLASSPATH=%ICE_HOME%/Ice-3.5.1/lib/*;../lib/*;../../purchasenear-goods/target/classes</env>
+			<service name="GoodsSearchService" entry="cn.purchasenear.v1.goods.rpcservice.ice.GoodsSearchIceService">
+				<adapter name="GoodsSearchService" id="GoodsSearchIceServiceAdapter${index}" endpoints="default -h localhost"
+						replica-group="GoodsSearchServiceBoxRep"/>
+				<property name="clusterNodes" value="localhost:9300"/>
+				<property name="clusterName" value="elasticsearch"/>
+			</service>
+		</icebox>
+	 </server-template>	
+	 
+	 
+	<replica-group id="GoodsSearchServiceBoxRep">
+        <load-balancing type="random" n-replicas="0"/>
+        <object identity="GoodsSearchService"/>
+    </replica-group>
+	
+      <node name="Node1">
+		 <server-instance template="GoodsSearchServiceBoxTemplate" index="1"/>
+      </node>
+   </application>
+</icegrid>

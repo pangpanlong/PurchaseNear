@@ -1,0 +1,1 @@
+slice2java --output-dir=./../src/main/java --stream GoodsService.ice

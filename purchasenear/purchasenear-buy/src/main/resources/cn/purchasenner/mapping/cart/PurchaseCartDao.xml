@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--                 命名空间用于查找 -->
+<mapper namespace="cn.purchasenear.v1.cart.dao.PurchaseCartDao">
+
+    <resultMap id="BaseResultMap" type="cn.purchasenear.v1.cart.domain.PurchaseCart">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="goods_id" property="goodsId" jdbcType="BIGINT"/>
+        <result column="amount" property="amount" jdbcType="INTEGER"/>
+        <result column="add_time" property="addTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--     替代，语句中的内容,简写 -->
+    <sql id="cols">
+         id,user_id,goods_id,amount,add_time
+    </sql>
+
+
+    <!--     插入一个用户 -->
+    <insert id="saveCart" parameterType="cn.purchasenear.v1.cart.domain.PurchaseCart" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into purchase_cart(id,user_id,goods_id,amount,add_time) values (#{id},#{userId},#{goodsId},#{amount},#{addTime})
+    </insert>
+</mapper>
