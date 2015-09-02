@@ -1,0 +1,72 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>cn.dsw</groupId>
+		<artifactId>purchasenear</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>purchasenear-common</artifactId>
+	<name>${project.artifactId}-${project.version}</name>
+	<description>Purchasenear Goods</description>
+
+<!-- .m2/setting.xml增加以下profile
+	<profile>
+       <id>oschina</id>
+		<repositories>
+			<repository>
+				<id>nexus</id>
+				<name>local private nexus</name>
+				<url>http://maven.oschina.net/content/repositories/thirdparty/</url>
+				<releases>
+					<enabled>true</enabled>
+				</releases>
+				<snapshots>
+					<enabled>false</enabled>
+				</snapshots>
+			</repository>
+		</repositories>
+	</profile>
+ -->	
+	<dependencies>
+		<dependency>
+			<groupId>com.zeroc.ice</groupId>
+			<artifactId>Ice</artifactId>
+			<version>3.5.1</version>
+		</dependency>
+		<dependency>
+		  <groupId>com.zeroc.icebox</groupId>
+		  <artifactId>IceBox</artifactId>
+		  <version>3.5.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.zeroc.ice</groupId>
+			<artifactId>IceGrid</artifactId>
+			<version>3.5.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.zeroc.ice</groupId>
+			<artifactId>Glacier2</artifactId>
+			<version>3.5.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.zookeeper</groupId>
+			<artifactId>zookeeper</artifactId>
+			<version>3.4.6</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.curator</groupId>
+			<artifactId>curator-framework</artifactId>
+			<version>2.8.0</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.curator</groupId>
+			<artifactId>curator-recipes</artifactId>
+			<version>2.8.0</version>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
+</project>
